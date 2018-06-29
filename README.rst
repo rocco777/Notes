@@ -116,26 +116,91 @@ Git push
 要架設一個網站, 我們可以間單的說需要兩種服務,
 一個是資料存放的地方, 一個是網域。
 
-資料存放可以把它想像成我們需要一個雲端硬碟來存資料
-
+資料存放可以把它想像成我們需要一個雲端硬碟來存資料, 
 而網域可以當作是你的網頁的一個地址或一個門牌
 
 網域
 -------------------
 網域大部分並非免費, 需要到網路上網域註冊商購買,
-這裡推薦給大家`godaddy <https://tw.godaddy.com/>`_ , 
+這裡推薦給大家 `godaddy <https://tw.godaddy.com/>`_ , 
 在哪裡買的都可以, 網路上也會有零星的免費網域提供可以去申請, 
 不過穩定性較低, 故暫不考慮。
 
 資料存放
 ------------------
 需要一個雲端上可以存放資料的地方, 雲端服務幾乎都是要收費的 (有些甚至所費不貲),
-最近 Google 有一個 Google Cloud Plarfrom, 
+最近 Google 有一個 `Google Cloud Plarfrom <https://cloud.google.com/gcp/?hl=zh-tw&utm_source=google&utm_medium=cpc&utm_campaign=japac-TW-all-zh-dr-bkws-all-super-trial-e-dr-1003987&utm_content=text-ad-none-none-DEV_c-CRE_263264845604-ADGP_Hybrid%20%7C%20AW%20SEM%20%7C%20BKWS%20~%20T1%20%7C%20EXA%20%7C%20General%20%7C%201:1%20%7C%20TW%20%7C%20zh%20%7C%20cloud%20platform%20%7C%20google%20cloud%20platform%20%7C%20en-KWID_43700031884576410-kwd-26415313501&userloc_9040379&utm_term=KW_google%20cloud%20platform&gclid=Cj0KCQjwjtLZBRDLARIsAKT6fXy56R0dHDS-kpBk7NrELQwv4flOnQ9sGDCCJUXwqwtKoran5T4n7zIaAnbGEALw_wcB&dclid=CMC9g4aY9tsCFcezlgodWUkCMQ/>`_ , 
 提供了一年的免費試用服務, 對於初學者來說簡直是個福音, 
 上面不單單是提供資料的存放, 還有很多而外的服務 虛擬主機、App Engine 之類的,
 有興趣的朋友可以自行去玩玩看其他功能。
 
+DNS
+------------------
+首先我們要把網域和資料做連結前, 我們需要先了解一下 DNS ,
 
+網域名稱系統 ( **D**omain **N**ame **S**ystem , 縮寫 DNS):
+
+它是網際網路的一項服務, 將域名和 IP 位置相互對應的一個分散式資料庫, 目前對於每一級域名長度的限制是 63 個字元,
+域名總長度則不能超過 253 個字元。
+
+DNS系統中常見的資源紀錄類型
+
+* **A** 紀錄 : 將 IP 位址連接主機名稱
+* **CNAME** 紀錄 : 一個主機允許擁有一個以前的DNS
+* **mx** 紀錄 : 確定電郵會傳送到正確位置
+* **NS** 紀錄 : 含有名稱伺服器的資料
+* **TXT** 紀錄 : 提供有關主機的額外資訊, 或提供更多伺服器的技術資料
+* **SRV** 紀錄 : 尋找託管特定服務的電腦
+* **AAAA** 紀錄 : 提供不合標準 A 紀錄的 IP 位址
+* **SPF** 紀錄 : 用來防止垃圾郵件
+
+Google Cloud Plarfrom
+--------------------
+由於自己本身是使用 Google Cloud Plarfrom 作為資料存放,
+故以下用此作為範例, 
+
+首先我們登入 Google Cloud Plarfrom 後,  在頁面左上角有個下拉式箭頭, 
+開啟後會請你選取專案, 我們按右上角的新增專案, 後面輸入你自己的專案名稱, 位置選擇無機構,
+
+這時會跳回剛剛的首頁, 可以看到剛剛的下拉式箭頭已經多了一個我們剛剛創建的新專案, 
+我們由左上角的選單尋找 **Storage** , 並選到**瀏覽器**, 然後創建一個 Bucket, 
+
+這裡要特別注意!! 使用上會有費用的差別 ( Google 有提供一年免費和300美金試用 )
+
+* 名稱須與你的網域相同, 前面加 www. (就是未來要給 user 連線的網址相同, 例: www.xxxxx.xxx)
+* 在你建立 Bucket 名稱, Google 會要求你證明網域所有人是你, 或到 `Google Search Console <https://www.google.com/webmasters/tools/home?hl=zh-TW/>`_ 進行認證
+* 預設儲存空間級別, 建議選擇 Regional , 當然有其他不同級別可供不同用途選擇, 這邊架設網頁 Regional就夠了
+* 位置選擇只要是 aisa 都可以
+
+接著就可以選擇你喜歡的方式上傳檔案, 接著記得把後面的公開共用的公開連結打開, 
+你按下公開連結的超連結, 就可以看到你的網頁呈現了, 
+但是可以注意到網址的部分是由 Google 提供的,
+下篇會教使用 DNS 連結你的資料與網域
+
+網站架設 (資料與網域連結)
+-------------------------
+個人是使用 GoDaddy 購買網域, 下面用這個當範例
+
+先到 GoDaddy , 進到會員中心, 接著按左上角**網域管理員**的下拉式選單, 
+選到網域, 頁面跳轉後對著自己網域名稱點進去( 請注意並非是 *使用我的網域* ), 
+移至頁面最下的其他設定中點選管理 DNS , 這邊我們就可以看到一些 GoDaddy 為我們設定好的紀錄, 
+先解釋右下角的轉址, 意思為當有 user 連結到此網域, 自動跳轉連結到你指定的網域, 
+這時我們先回到 Google Cloud Plarfrom , 一樣在左邊的選單中找到 **網路服務** -> **Cloud DNS** , 
+按下建立區域
+
+* 區域名稱可以取自己喜歡的, 並無影響
+* DNS 名稱請取自己買下網域的名稱 ( 例 : xxxxx.xxx )
+
+創建完, 進入看到 Google 幫你產生了兩個紀錄, NS 紀錄跟 SOA 紀錄, 
+這是給我們連結網域跟資料使用的, 回到 GoDaddy , 
+看到網域名稱伺服器的地方, 按下變更 選擇自訂, 
+把剛剛 Google 幫你產生四條的 NS 紀錄貼過來,
+這邊要注意貼過來的時候, 記得把末端的點給 dele 掉, 
+儲存後回到 Google Cloud Plarfrom 的 DNS 這, 
+在紀錄集的地方按下新增紀錄集, DNS 名稱請取跟你 Bucket 一樣的名稱,
+資源紀錄類型選擇 CNAME , 正式名稱請打 ``c.storage.googleapis.com.`` , 
+這樣我們就已經完成設定了, 不過需要等待 30 分鐘更新, 
+更新完成後就可以到你的網域看到你的網站拉, 不會再是 google 所提供的網域。
 
 
 
