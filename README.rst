@@ -33,14 +33,9 @@ Git push
     sudo apt install git
     sudo dnf install git
 
-接著到自己的 github 上創建一個新專案，
-
-這邊要注意的是，
-
-存取權如果選擇 Public 那麼是可以免費使用的，
-
+接著到自己的 github 上創建一個新專案, 
+這邊要注意的是, 存取權如果選擇 Public 那麼是可以免費使用的, 
 但是如果選取 Privte 是必須每月付費的。
-
 
 回到本身 Terminal
 
@@ -49,11 +44,13 @@ Git push
 ::
 
     mkdir 資料夾名稱
+
 然後進入到資料夾
 
 ::
 
     cd 資料夾名稱
+
 初始化這個資料夾
 
 ::
@@ -61,11 +58,9 @@ Git push
     git init
 如果出現 Initialized emptyGit repository in xxx/xxx/xxx.git
 
-代表成功初始化這個資料夾
-
-現在你可以把檔案丟進這個資料夾
-
-這邊先假設從0開始
+代表成功初始化這個資料夾, 
+現在你可以把檔案丟進這個資料夾, 
+這邊先假設從0開始, 
 
 建立空白檔案
 
@@ -73,23 +68,24 @@ Git push
 
     touch index.html
 
-這時在 git 上輸入 ls
+這時在 git 上輸入 ls , 即可看到檔案夾內有什麼檔案
 
-即可看到檔案夾內有什麼檔案
 
 查詢哪些檔案還沒被 git 追蹤
 
 ::
 
     git status
+
+
 把檔案加入到 git 
 
 ::
 
     git add 檔案名稱
-這時再下一次 git status 的指令
+這時再下一次 git status 的指令, 
+就可以看到剛剛的檔案 git 已經追蹤可以 commit , 
 
-就可以看到剛剛的檔案 git 已經追蹤可以 commit
 
 每次檔案的變動如何去自動比較
 
@@ -97,9 +93,7 @@ Git push
 
     git diff
 
-如果是舊檔案更動，再更動完後
-
-可以用下面指令新增 commit 訊息
+如果是舊檔案更動，再更動完後, 可以用下面指令新增 commit 訊息
 
 ::
 
@@ -108,7 +102,7 @@ Git push
 
 
 
-架設網站
+Personal web backend building
 ==============================
 
 須知
@@ -138,7 +132,7 @@ DNS
 ------------------
 首先我們要把網域和資料做連結前, 我們需要先了解一下 DNS ,
 
-網域名稱系統 ( **D**omain **N**ame **S**ystem , 縮寫 DNS):
+網域名稱系統 ( **D** omain **N** ame **S** ystem , 縮寫 DNS):
 
 它是網際網路的一項服務, 將域名和 IP 位置相互對應的一個分散式資料庫, 目前對於每一級域名長度的限制是 63 個字元,
 域名總長度則不能超過 253 個字元。
@@ -201,6 +195,98 @@ Google Cloud Plarfrom
 資源紀錄類型選擇 CNAME , 正式名稱請打 ``c.storage.googleapis.com.`` , 
 這樣我們就已經完成設定了, 不過需要等待 30 分鐘更新, 
 更新完成後就可以到你的網域看到你的網站拉, 不會再是 google 所提供的網域。
+
+Django
+=====================
+
+Django 是一種網頁框架, 目前有許多的框架可供套用, Django 只是 Python 框架的其中一種, 
+主要用於用來支援動態網站、網路應用程式及網路服務的開發, 
+這種框架有助於減輕網頁開發時共通性活動的工作負荷, 例如許多框架提供資料庫存取介面、標準樣板以及會話管理等, 
+可提昇程式碼的可再用性。
+
+
+install
+---------------------
+
+先確認電腦是否已安裝 Django , 在 Terminal 輸入
+
+::
+
+    $ python -m django --version
+
+如果 Django 已經被安裝了, Terminal就會顯示目前的版本
+
+
+Step 1.  確認 Pyhon 版本
+
+::
+
+    python --version
+
+
+Step 2.  確認 PiP 版本
+
+::
+
+    pip --version
+
+
+**如果尚未安裝, 請至官網安裝或用 terminal 安裝**
+
+
+Step 3.  使用 PiP 安裝 Django
+
+
+::
+
+    sudo pip install Django
+
+
+
+開始 Django 專案 :
+------------------------ 
+
+打開 Terminal , cd 進 Desktop 或任何想要存放檔案的位置
+
+::
+
+    django-admin.py startproject mysite
+
+就可以看到有一個名為 test 的檔案夾已經創建完成, 裡面已經自動創建了相關的網頁架構文件
+
+ - 最外層的 mysite 檔案夾, 它跟 Django 無相關, 可以命名為任何你想要的名稱
+ - manage.py : 是一個 command-line , 可以讓我們以各種方式與此 Django 互動, 可以在 ｀django-admin and manage.py <https://docs.djangoproject.com/en/2.0/ref/django-admin/>`_ 看到更多的詳細資訊
+ - 檔案夾內的 mysite 是 Pyhon 的 package , 它的名稱是用來導入內容的 (例如 : mysite.urls )  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+接著使用 Terminal 進入 mysite 檔案夾後, 輸入
+
+::
+
+    python manage.py runsever
+
+
+
+可以看到 Terminal 中顯示 
+
+``Starting development sever at http://127.0.0.1:8000/``
+
+``127.0.0.1`` 意思等同於 ``localhost`` , 
+這時在瀏覽器上輸入 ``http://localhost:8000`` 或 ``http://127.0.0.1:8000`` , 
+就可以看到自己的網頁。
+
 
 
 
