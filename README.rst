@@ -45,6 +45,7 @@ Git push
 
     mkdir 資料夾名稱
 
+
 然後進入到資料夾
 
 ::
@@ -56,6 +57,7 @@ Git push
 ::
 
     git init
+
 如果出現 Initialized emptyGit repository in xxx/xxx/xxx.git
 
 代表成功初始化這個資料夾, 
@@ -83,8 +85,8 @@ Git push
 ::
 
     git add 檔案名稱
-這時再下一次 git status 的指令, 
-就可以看到剛剛的檔案 git 已經追蹤可以 commit , 
+
+這時再下一次 git status 的指令, 就可以看到剛剛的檔案 git 已經追蹤可以 commit , 
 
 
 每次檔案的變動如何去自動比較
@@ -98,7 +100,9 @@ Git push
 ::
 
     git commit -a
+
 使用 git lg 就可以看到多了一條最新的 commit
+
 
 
 
@@ -255,20 +259,11 @@ Step 3.  使用 PiP 安裝 Django
 就可以看到有一個名為 test 的檔案夾已經創建完成, 裡面已經自動創建了相關的網頁架構文件
 
  - 最外層的 mysite 檔案夾, 它跟 Django 無相關, 可以命名為任何你想要的名稱
- - manage.py : 是一個 command-line , 可以讓我們以各種方式與此 Django 互動, 可以在 ｀django-admin and manage.py <https://docs.djangoproject.com/en/2.0/ref/django-admin/>`_ 看到更多的詳細資訊
+ - manage.py : 是一個 command-line , 可以讓我們以各種方式與此 Django 互動, 可以在 `django-admin and manage.py <https://docs.djangoproject.com/en/2.0/ref/django-admin/>`_    看到更多的詳細資訊
  - 檔案夾內的 mysite 是 Pyhon 的 package , 它的名稱是用來導入內容的 (例如 : mysite.urls )  
- 
-
-
-
-
-
-
-
-
-
-
-
+ - mysite/settings.py : 儲存 Django 的配置和設置
+ - mysite/urls.py : Django 的 URL , 顯示 Django 所連結網站的目錄
+ - mysite/wsgi.py : 與 WSGI 兼容的 Web 服務器的入口點 
 
 
 接著使用 Terminal 進入 mysite 檔案夾後, 輸入
@@ -286,6 +281,14 @@ Step 3.  使用 PiP 安裝 Django
 ``127.0.0.1`` 意思等同於 ``localhost`` , 
 這時在瀏覽器上輸入 ``http://localhost:8000`` 或 ``http://127.0.0.1:8000`` , 
 就可以看到自己的網頁。
+
+Django 本身有一個很實用的命令, 請確保在 ``manage.py`` 的檔案位置
+
+::
+
+    $ python manage.py startapp polls
+
+你就可以在該位置看到, 它自動幫你生成了一個名為 polls 的資料夾
 
 
 
