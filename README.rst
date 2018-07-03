@@ -31,30 +31,31 @@ Git 是一款分散式的版控系統 (Distributed Version Control) 雖然通常
 
 Git 指令
 --------------------
- `` $ git init `` 在要建立數據庫目錄的位置, 進行版本控制
 
- `` $ git add <檔案名稱> `` 追蹤檔案或目錄到索引, 可以直接指定檔案名稱, 可以將檔案註冊到索引, 如果加上 -p 參數, 可以只選擇修改檔案的一部分, 
+ ``$ git init`` 在要建立數據庫目錄的位置, 進行版本控制
+
+ ``$ git add <檔案名稱>`` 追蹤檔案或目錄到索引, 可以直接指定檔案名稱, 可以將檔案註冊到索引, 如果加上 -p 參數, 可以只選擇修改檔案的一部分, 
  -i 參數, 會以互動的方式詢問要註冊在索引的檔案
 
- `` $ git commit `` 可以提交新的索引到檔案, 添加 -a 參數, 就可以檢測出有修改的檔案(不包括新增的檔案), 將其加入索引並提交, 添加 -m 參數, 
+ ``$ git commit`` 可以提交新的索引到檔案, 添加 -a 參數, 就可以檢測出有修改的檔案(不包括新增的檔案), 將其加入索引並提交, 添加 -m 參數, 
 就可以指令提交 "提交指令" , 不添加 -m 參數, 就會啟動修改提交訊息的編輯器
 
- `` $ git status `` 顯示修改檔案的清單, 加上 -s 參數, 僅會顯示已修改的檔案名稱, 
+ ``$ git status`` 顯示修改檔案的清單, 加上 -s 參數, 僅會顯示已修改的檔案名稱, 
  如果在 -s 後再加上 -b 的參數, 則會顯示分支的名稱
 
- `` $ git diff `` 查看修改檔案的差異, 加上 --cached 參數, 會顯示索引與 HEAD 之間的差異
+ ``$ git diff`` 查看修改檔案的差異, 加上 --cached 參數, 會顯示索引與 HEAD 之間的差異
 
- `` $ git log `` 顯示提交紀錄, 如果是 `` git lg `` 就是簡單版
+ ``$ git log`` 顯示提交紀錄, 如果是 `` git lg `` 就是簡單版
 
- `` $ git mv <原本的檔案名稱> <新的檔案名稱> `` 修改/移動一個檔案/目錄名稱
+ ``$ git mv <原本的檔案名稱> <新的檔案名稱>`` 修改/移動一個檔案/目錄名稱
 
- `` $ git rm <檔案> `` 刪除檔案
+ ``$ git rm <檔案>`` 刪除檔案
 
- `` $ git checkout -- <檔案> `` 還原在工作目錄已更改的檔案
+ ``$ git checkout -- <檔案>`` 還原在工作目錄已更改的檔案
 
- `` $ git reset HEAD -- <檔案> `` 刪除已追蹤到索引的檔案
+ ``$ git reset HEAD -- <檔案>`` 刪除已追蹤到索引的檔案
 
- `` @ git add -u `` 只追蹤已提交過的檔案到索引
+ ``$ git add -u`` 只追蹤已提交過的檔案到索引
 
 
 Git push
@@ -164,7 +165,7 @@ Personal web backend building
 
 資料存放
 ------------------
-需要一個雲端上可以存放資料的地方, 雲端服務幾乎都是要收費的 (有些甚至所費不貲),
+需要一個雲端上可以存放資料的地方, 雲端服務幾乎都是要收費的,
 最近 Google 有一個 `Google Cloud Plarfrom <https://cloud.google.com/gcp/?hl=zh-tw&utm_source=google&utm_medium=cpc&utm_campaign=japac-TW-all-zh-dr-bkws-all-super-trial-e-dr-1003987&utm_content=text-ad-none-none-DEV_c-CRE_263264845604-ADGP_Hybrid%20%7C%20AW%20SEM%20%7C%20BKWS%20~%20T1%20%7C%20EXA%20%7C%20General%20%7C%201:1%20%7C%20TW%20%7C%20zh%20%7C%20cloud%20platform%20%7C%20google%20cloud%20platform%20%7C%20en-KWID_43700031884576410-kwd-26415313501&userloc_9040379&utm_term=KW_google%20cloud%20platform&gclid=Cj0KCQjwjtLZBRDLARIsAKT6fXy56R0dHDS-kpBk7NrELQwv4flOnQ9sGDCCJUXwqwtKoran5T4n7zIaAnbGEALw_wcB&dclid=CMC9g4aY9tsCFcezlgodWUkCMQ/>`_ , 
 提供了一年的免費試用服務, 對於初學者來說簡直是個福音, 
 上面不單單是提供資料的存放, 還有很多而外的服務 虛擬主機、App Engine 之類的,
@@ -174,7 +175,7 @@ DNS
 ------------------
 首先我們要把網域和資料做連結前, 我們需要先了解一下 DNS ,
 
-網域名稱系統 ( **D**omain **N**ame **S**ystem , 縮寫 DNS):
+網域名稱系統 ( Domain Name System , 縮寫 DNS):
 
 它是網際網路的一項服務, 將域名和 IP 位置相互對應的一個分散式資料庫, 目前對於每一級域名長度的限制是 63 個字元,
 域名總長度則不能超過 253 個字元。
@@ -276,7 +277,7 @@ Step 2.  確認 PiP 版本
 **如果尚未安裝, 請至官網安裝或用 terminal 安裝**
 
 
-Step 3.  使用 PiP 安裝 Django
+Step 3.  使用 pip 安裝 Django
 
 
 ::
@@ -285,7 +286,7 @@ Step 3.  使用 PiP 安裝 Django
 
 
 
-開始 Django 專案 :
+開始 Django 專案 
 ------------------------ 
 
 打開 Terminal , cd 進 Desktop 或任何想要存放檔案的位置
