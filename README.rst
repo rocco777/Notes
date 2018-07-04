@@ -329,6 +329,20 @@ Django 本身有一個很實用的命令, 請確保在 ``manage.py`` 的檔案�
 
 你就可以在該位置看到, 它自動幫你生成了一個名為 polls 的資料夾
 
+現在, 打開 mysite/settings.py , 這是個包含了 Django 項目設置的 Python 模塊。
+這個配置文件使用 SQLite 作為默認數據庫, 如果你不熟悉數據庫, 或者只是想嘗試下 Django, 
+這是最簡單的選擇。 Python 內置 SQLite，所以你無需安裝額外東西來使用它。
+當你開始一個真正的項目時, 你可能更傾向使用一個更具擴展性的數據庫, 例如 PostgreSQL, 
+避免中途切換數據庫這個令人頭疼的問題。
+
+如果你想使用其他數據庫，你需要安裝合適的 database bindings , 
+然後改變設置文件中 DATABASES 'default' 項目中的一些鍵值：
+ - ENGINE -- 可選值有 'django.db.backends.sqlite3' , 'django.db.backends.postgresql' , 
+ 'django.db.backends.mysql' , 或 'django.db.backends.oracle' , 其它可用後端。
+
+ - NAME - 數據庫的名稱。如果使用的是 SQLite，數據庫將是你電腦上的一個文件，在這種情況下， NAME 應該是此文件的絕對路徑，包括文件名。默認值 os.path.join(BASE_DIR, 'db.sqlite3') 將會把數據庫文件儲存在項目的根目錄。
+ 如果你不使用 SQLite，則必須添加一些額外設置，比如 USER 、 PASSWORD 、 HOST 等等。想了解更多數據庫設置方面的內容，請看文檔：DATABASES 。
+
 
 
 
