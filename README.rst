@@ -344,6 +344,52 @@ Django 本身有一個很實用的命令, 請確保在 ``manage.py`` 的檔案�
  如果你不使用 SQLite，則必須添加一些額外設置，比如 USER 、 PASSWORD 、 HOST 等等。想了解更多數據庫設置方面的內容，請看文檔：DATABASES 。
 
 
+Expree 
+==================
+
+install
+------------------
+
+假設已安裝 Node.js , 請建立目錄來保留您的應用程式, 並使它成為的工作目錄
+
+::
+
+    $ mkdir myapp
+    $ cd myapp
+
+
+使用 npm init 指令, 為應用程式建立 package.json 檔, 如需 package.json 如何運作的相關資訊, 
+請參閱 `` Specifics of npm’s package.json handling <https://docs.npmjs.com/files/package.json>`_
+
+::
+
+    $npm init
+
+這個指令會提供一些事項, 例如：應用程式的名稱和版本。現在, 只需按下 RETURN 鍵, 接受大部分的預設值, 但下列除外：
+
+::
+
+    entry point: (index.js)
+
+輸入 app.js , 或所要的主要檔名稱。如果希望其名稱是 index.js , 請按 RETURN 鍵 , 接受建議的預設檔名。
+現在, 將 Express 安裝在 app 目錄中, 並儲存在相依關係清單中。例如：
+
+::
+
+    $ npm install express --save
+
+如果只想暫時安裝 Express , 而不新增至相依關係清單, 請省略 --save 選項：
+
+::
+
+    $ npm install express
+
+
+
+
+
+
+
 
 
 
