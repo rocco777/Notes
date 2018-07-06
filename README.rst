@@ -344,7 +344,7 @@ Django 本身有一個很實用的命令, 請確保在 ``manage.py`` 的檔案�
  如果你不使用 SQLite，則必須添加一些額外設置，比如 USER 、 PASSWORD 、 HOST 等等。想了解更多數據庫設置方面的內容，請看文檔：DATABASES 。
 
 
-Expree 
+Exprees 
 ==================
 
 install
@@ -359,7 +359,7 @@ install
 
 
 使用 npm init 指令, 為應用程式建立 package.json 檔, 如需 package.json 如何運作的相關資訊, 
-請參閱 `` Specifics of npm’s package.json handling <https://docs.npmjs.com/files/package.json>`_
+請參閱  `Specifics of npm’s package.json handling <https://docs.npmjs.com/files/package.json/>`_ 
 
 ::
 
@@ -383,6 +383,65 @@ install
 ::
 
     $ npm install express
+
+
+基本路由
+-------------------
+
+路由是指判斷應用程式如何回應用戶端對特定端點的要求, 
+而這個特定端點是一個 URI（或路徑）與一個特定的 HTTP 要求方法(GET、POST 等), 
+每一個路由可以有一或多個處理程式函數, 當路由相符時, 就會執行這些函數。
+
+路由定義的結構如下：
+
+::
+
+    app.METHOD(PATH, HANDLER)
+
+其中
+
+ - app 是 express 的實例
+ - METHOD 是   `HTTP 要求方法 <https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE/>`_
+ - PATH 是伺服器上的路徑
+ - HANDLER 是當路由相符時要執行的函數
+
+下列範例說明如何定義簡單的路由
+
+首頁顯示 Hello World! :
+
+::
+
+    app.get('/', function (req, res) {
+    res.send('Hello World!');
+    });
+
+對根路由 (/)（應用程式的首頁）發出 POST 要求時的回應 :
+
+::
+
+    app.post('/', function (req, res) {
+    res.send('Got a POST request');
+    });
+
+對 /user 路由發出 PUT 要求時的回應 ：
+
+::
+
+    app.put('/user', function (req, res) {
+    res.send('Got a PUT request at /user');
+    });
+
+對 /user 路由發出 DELETE 要求時的回應 ：
+
+::
+
+    app.delete('/user', function (req, res) {
+    res.send('Got a DELETE request at /user');
+    });
+
+
+
+
 
 
 
