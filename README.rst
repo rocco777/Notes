@@ -440,6 +440,55 @@ install
     });
 
 
+在 Express 中提供靜態檔案
+--------------------------
+
+如果想在 Express 中使用靜態的檔案, 只要將檔案傳遞給 express.static 中介函數, 即可。
+
+在名為 **public** 的資料夾中, 提供靜態檔案 :
+
+::
+
+    app.use(express.static('public'));
+
+載入位於 public 資料夾目錄中的檔案 : 
+
+::
+
+    http://localhost:3000/picture.jpg
+    http://localhost:3000/images/picture.jpg
+    http://localhost:3000/html/myweb.html
+
+
+而這個中介函數是可以多是使用, 在你要使用多個靜態檔案資料夾時 :
+
+::
+
+    app.use(express.static('public'));
+    app.use(express.static('video'));
+
+如果要為 express.static 函數提供的檔案, 建立虛擬路徑字首, 為檔案指定裝載目錄 : 
+
+::
+
+    app.use('/static', express.static('public'));
+
+現在就可以透過 /static 路徑, 來載入 public 目錄中的檔案 : 
+
+::
+
+    http://localhost:3000/static/picture.jpg
+    http://localhost:3000/static/images/picture.jpg
+    http://localhost:3000/static/html/myweb.html
+
+但是如果你是想從額外的資料夾, 執行 Express 應用程式, 請使用絕對路徑 : 
+
+::
+
+    app.use('/static', exprss.static(__dirname + '/public'));
+
+
+
 
 
 
