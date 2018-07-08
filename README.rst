@@ -248,7 +248,7 @@ Django 是一種網頁框架, 目前有許多的框架可供套用, Django 只�
 可提昇程式碼的可再用性。
 
 
-install
+安裝
 ---------------------
 
 先確認電腦是否已安裝 Django , 在 Terminal 輸入
@@ -341,13 +341,14 @@ Django 本身有一個很實用的命令, 請確保在 ``manage.py`` 的檔案�
  'django.db.backends.mysql' , 或 'django.db.backends.oracle' , 其它可用後端。
 
  - NAME - 數據庫的名稱。如果使用的是 SQLite，數據庫將是你電腦上的一個文件，在這種情況下， NAME 應該是此文件的絕對路徑，包括文件名。默認值 os.path.join(BASE_DIR, 'db.sqlite3') 將會把數據庫文件儲存在項目的根目錄。
- 如果你不使用 SQLite，則必須添加一些額外設置，比如 USER 、 PASSWORD 、 HOST 等等。想了解更多數據庫設置方面的內容，請看文檔：DATABASES 。
+ 如果你不使用 SQLite，則必須添加一些額外設置，比如 USER 、 PASSWORD 、 HOST 等等。
+ 想了解更多數據庫設置方面的內容，請看文檔： ` DATABASES <https://docs.djangoproject.com/zh-hans/2.0/ref/settings/>`_ 。
 
 
 Exprees 
 ==================
 
-install
+安裝
 ------------------
 
 假設已安裝 Node.js , 請建立目錄來保留您的應用程式, 並使它成為的工作目錄
@@ -488,6 +489,23 @@ install
     app.use('/static', exprss.static(__dirname + '/public'));
 
 
+中介軟體
+----------------------------
+
+Express 是一個本身功能極簡的路由與中介軟體 Web 架構：本質上，Express 應用程式是一系列的中介軟體函數呼叫。
+中介軟體函數是一些有權存取要求物件 (req)、回應物件 (res) 和應用程式要求/回應循環中之下一個中介軟體函數的函數。
+下一個中介軟體函數通常以名為 next 的變數表示。
+中介軟體函數可以執行下列作業：
+
+ - 執行任何程式碼
+ - 對要求和回應物件進行變更
+ - 結束要求/回應循環
+ - 呼叫堆疊中的下一個中介軟體函數
+
+如果現行中介軟體函數不會結束要求/回應循環, 它必須呼叫 next(), 以便將控制權傳遞給下一個中介軟體函數。否則，要求將會停擺。
+使用 app.use() 和 app.METHOD() 函數, 
+將應用程式層次的中介軟體連結至 app object 實例, 
+其中 METHOD 是中介軟體函數要處理的 HTTP 要求方法(例如 GET、PUT 或 POST), 並採小寫。
 
 
 
