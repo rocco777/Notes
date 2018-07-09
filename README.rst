@@ -502,10 +502,44 @@ Express 是一個本身功能極簡的路由與中介軟體 Web 架構：本質�
  - 結束要求/回應循環
  - 呼叫堆疊中的下一個中介軟體函數
 
-如果現行中介軟體函數不會結束要求/回應循環, 它必須呼叫 next(), 以便將控制權傳遞給下一個中介軟體函數。否則，要求將會停擺。
+如果現行中介軟體函數不會結束要求/回應循環, 它必須呼叫 next(), 以便將控制權傳遞給下一個中介軟體函數。否則, 要求將會停擺。
 使用 app.use() 和 app.METHOD() 函數, 
 將應用程式層次的中介軟體連結至 app object 實例, 
 其中 METHOD 是中介軟體函數要處理的 HTTP 要求方法(例如 GET、PUT 或 POST), 並採小寫。
+
+如果現行中介軟體函數不會結束回應循環, 它就會需要使用 next() , 以便將控制傳遞給下一個中介軟體, 否則, 要求將會被停止。
+
+使用 app.use() 和 app.METHOD() 函數, 將應用程式層次的中介軟體至 app object , 
+其中METHOD 是中介軟體函數處理 HTTP 要求的方法 (例如 GET PUT POST), 
+
+顯示沒有裝載路徑的中介函數, 每當應用程式收到要求時, 就會執行此函數 : 
+
+::
+
+    var app = express();
+
+
+    app.use(function (req, res, next)) {
+      console.log('Time : ', Date.now());
+      next();
+    })
+
+顯示裝載在 /user/:id 路徑的中介軟體函數, 會對 /user/:id 路徑上任何類型的 HTTP 要求, 執行此函數 : 
+
+::
+
+    app.use('/user/:id', function (req, res, next) {
+      console.log('Request Type : ', req.method);
+      next;
+    });
+
+顯示路由和其處理函示函數(中介軟體系統), 此函數會處理指向/user/:id 路徑的 GET 要求 : 
+
+::
+
+    app.get('/user/:id', function (req, res, next) {
+      res.send('USER')
+    });
 
 
 
