@@ -538,8 +538,70 @@ Express 是一個本身功能極簡的路由與中介軟體 Web 架構：本質�
 ::
 
     app.get('/user/:id', function (req, res, next) {
-      res.send('USER')
+      res.send('USER');
     });
+
+
+Exprees 自動產生器
+--------------------------
+
+使用應用程式產生器工具 express , 快速建立應用程式架構
+
+使用下列指令來安裝 express :
+
+::
+
+    npm install express-generator -g
+
+使用 -h 選項可以顯示指令選項
+
+在現行工作目錄中建立一個名為 myapp 的 Express 應用程式 :
+
+::
+
+    $ express --view=pug myapp
+
+
+        create : myapp
+        create : myapp/package.json
+        create : myapp/app.js
+        create : myapp/public
+        create : myapp/public/javascripts
+        create : myapp/public/images
+        create : myapp/routes
+        create : myapp/route/index.js
+        create : myapp/route/user.js
+        create : myapp/public/stylesheets
+        create : myapp/public/stylesheets/style.css
+        create : myapp/views
+        create : myapp/views/index.pug
+        create : myapp/views/layout.pug
+        create : myapp/views/error.pug
+        create : myapp/bin
+        create : myapp/bin/www
+
+在安裝相依的項目(先 cd 進要的資料夾) : 
+
+::
+
+    $ cd myapp
+    $ npm install
+
+在 MacOS 或 Linux 中, 使用下列指令來執行應用程式 :
+
+::
+
+    $ DEBUG=myapp: * npm start
+
+在 windows 中, 使用下列指令來執行應用程式 :
+
+::
+
+    $ DEBUG=myapp: * & npm start
+
+然後在瀏覽器中載入 ``http://localhost:3000/`` , 以存取應用程式
+
+        
 
 
 
