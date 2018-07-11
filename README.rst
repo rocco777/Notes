@@ -142,6 +142,28 @@ Git push
 
 使用 git lg 就可以看到多了一條最新的 commit
 
+增加上傳位置(網址為 github 上, 該專案的上傳網址, origin 是可以替換的名稱)
+
+::
+
+    git remote add origin 網址
+
+驗證是否完成設定, 可以輸入 ``git remote``  ``git remote -v`` 一個是顯示名稱, 一個是詳細內容, 
+而輸入 ``git remote show origin`` 會讓程式真的去訪問伺服器的狀態
+
+設定 push 的路徑 ( -u 是為了設定本地端版本, 永遠跟著伺服器上的, 所以下次 push 不用打 ``git push origin master`` , 直接輸入 ``git push`` )
+
+::
+
+    git push -u origin master
+
+輸入後他會要求輸入你 Github 的帳號, 接下來是打密碼, 成功驗證會顯示 ``* [new branch]   master  ->  master`` , 
+這樣以後要 push 上去, 只要輸入 ``git push`` 即可。 
+
+
+
+
+
 
 
 
@@ -602,6 +624,9 @@ Exprees 自動產生器
 然後在瀏覽器中載入 ``http://localhost:3000/`` , 以存取應用程式
 
         
+MangoDB
+======================
+
 
 
 
