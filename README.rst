@@ -158,7 +158,7 @@ Git push
     git push -u origin master
 
 輸入後他會要求輸入你 Github 的帳號, 接下來是打密碼, 成功驗證會顯示 ``* [new branch]   master  ->  master`` , 
-這樣以後要 push 上去, 只要輸入 ``git push`` 即可。 
+這樣以後要 push 上去, 只要輸入 ``git push`` 即可。` 
 
 
 
@@ -624,8 +624,45 @@ Exprees 自動產生器
 然後在瀏覽器中載入 ``http://localhost:3000/`` , 以存取應用程式
 
         
-MangoDB
+MongoDB
 ======================
+
+安裝
+----------------------
+
+先更新 Homebrew 套件 : 
+
+::
+
+    brew update
+
+安裝 mongodb : 
+
+::
+
+    brew install mongodb
+
+之後需等待一段時間, 安裝完成後, 在使用前還要先建立資料庫存放的目錄, 
+預設的資料庫存放路徑 ``/data/db`` : 
+
+::
+
+    mkdir -p /data/db
+
+建立好目錄後, 確認一下這個目錄可以被執行 ``mongod`` 的使用者存取, 
+可能會需要用管理者權限修改一下這個目錄的擁有者, 最後再用擁有者的權限來啟動 ``mongod`` : 
+
+::
+
+    mongod
+
+如果安裝的 MongoDB 是自己開發或測試用的話, 建議可以把資料庫放在自己的主目錄下, 
+然後用自己的權限來執行 ``mongod`` 即可, 省去處理檔案全縣的麻煩。
+
+::
+
+    mkdir -p ~/data/db
+    mongod --dbpath ~/data/db
 
 
 
