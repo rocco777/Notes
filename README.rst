@@ -19,6 +19,7 @@
 
 
 
+
 Git
 ==================
 這是一種版本控制的系統, 不論是不是工程師, 我們每次工作都會有新的進度, 
@@ -627,6 +628,9 @@ Exprees 自動產生器
 MongoDB
 ======================
 
+MongoDB 是一個基於分布式文件儲存的數據庫。旨在為 WEB 應用提供可擴展的高性能數據儲存解決方案。
+
+
 安裝
 ----------------------
 
@@ -663,6 +667,114 @@ MongoDB
 
     mkdir -p ~/data/db
     mongod --dbpath ~/data/db
+
+
+Mongoose
+--------------------
+
+如何連結檔案, 首先先 import 套件, 其中 ``./testDBService`` 是路徑, 請依照自己設定的路徑設置, 
+而 ``testDBService`` 是我們自己寫的一個函式, 用於確認是否有連線成功(意思是 import 了自己的另一個檔案) :  
+
+::
+
+  let mongoose = require('mongoose');
+  let testDBService = require('./testDBService');
+
+schema 為模板, 就是往後的資料存入要依照什麼格式, 哪些規則去使用, 以下面例子就是資料需要有 userName 跟 pass , 
+而 pass 並不是必要資料可有可無, 因為可以看到再 userName 的下面多了兩個規則,  ``required`` 意思為是不是必須的, 
+userName 設定為 true , 故每筆資料輸入都需要有這個欄位的資料,  ``unique`` 意思為是不是唯一, 
+就是這筆資料能不能以同個名稱重複創建, 這裡設定為 ture 必須是唯一, 故資料輸入不得重複名稱 : 
+
+::
+
+    mongoose.connection.once("open",function(){
+        var schema = mongoose.Schema({
+            userName: {
+                type: String,   
+                required:true,  
+                unique:true  
+            },
+            pass:{
+                type:String
+            }
+        });
+    }
+
+接著我們要創建一個 table 分類這些資料, User 那個欄位就是為資料分類創建的名稱, 跟要分發的類別, 
+這樣丟的資料都會丟到名為 User 的分類下 :
+
+::
+
+    let users = mongoose.model('User', schma);
+
+接著把資料專門拉出來, 以後找資料或是要做處理都會比較方便 : 
+
+::
+
+    testDBService.testUserModel(user);
+
+
+我們為了要讓其他的檔案可以使用這個函式, 所以我們要把檔案傳出去, 這時我們就要使用 exports ,
+以後其他檔案要使用就 require 即可 : 
+
+::
+
+    exports.mongoose_connect = mongosse_connect;
+
+附上完整程式碼 :
+
+::
+
+    let mongoose = require('mongoose');
+    let testDBService = require('./testDBService');
+
+    function mongoose_connect () {
+        try{
+            mongoose.connect('mongodb://localhost:27017/test')
+        }catch(error){
+            console.log(error)
+        }
+        mongoose.connection.once("open",function(){
+            var schema = mongoose.Schema({
+                userName: {
+                    type: String,   
+                    required:true,  
+                    unique:true  
+                },
+                pass:{
+                    type:String
+                }
+            });
+            let users = mongoose.model('User', schema);
+            testDBService.testUserModel(users);
+        }).on('error',function(err){
+            throw err
+        })
+    }
+    
+    exports.mongoose_connect = mongoose_connect;
+
+
+
+    --------------------------------------------------
+
+    testDBService的程式碼 : 
+
+    let mongoose = require('mongoose')
+    let userModelInService = "";
+
+    function testUserModel(userModel){
+        userModelInService = userModel;
+        console.log("waduhek ", userModelInService);
+    }
+
+    exports.testUserModel = testUserModel;
+
+
+
+
+
+
 
 
 
