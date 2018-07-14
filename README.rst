@@ -770,6 +770,57 @@ userName 設定為 true , 故每筆資料輸入都需要有這個欄位的資料
 
     exports.testUserModel = testUserModel;
 
+創建一個可以讓前台跟後台拿資料的 API ,   ``.create`` 是建造存取資料, 
+並且在創建成功或失敗 print 出相對印的結果, 用於確認程式狀態, 
+最後一樣別忘記 export 檔案出去, 這樣前台才可以使用(這部分的程式寫在後台的文件裡) :  
+
+::
+
+    function create(user) {
+    userModelInService.create(user, (err, result)=>{
+        if(err){
+            console.log("create err occur ", err);
+        }else{
+            console.log("create success");
+
+        }
+    }
+
+    exports.createUser = create;
+
+接下來在前台的文件中, 我們要去使用剛剛後台寫好的 API , 不過因為在練習沒有數據, 
+故我們在上面先 let 一個數據用於練習,  ``fetch`` 是 RESTful API 的管道, 
+mathhod 是要使用的方法, body 中的 ``stringify`` 用途是把 JSON 格式的資料轉換成為字串節省空間, 
+header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭解程式狀態 : 
+
+::
+
+    let createUserURL = "http://localhost:3000/users/test";
+
+
+    function createUser(){
+    let userData = {
+        userName: "dandan",
+        pass: "Waduhek"
+    } 
+
+    fetch(createUserURL, {
+        method: 'POST', 
+        body: JSON.stringify(userData),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+    }
+
+
+
+
+
+
+
+
 
 
 
