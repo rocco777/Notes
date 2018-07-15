@@ -672,6 +672,15 @@ MongoDB 是一個基於分布式文件儲存的數據庫。旨在為 WEB 應用�
 Mongoose
 --------------------
 
+使用 npm 安裝 : 
+
+::
+
+    npm install mongoose
+
+
+連結 MongoDB :
+
 如何連結檔案, 首先先 import 套件, 其中 ``./testDBService`` 是路徑, 請依照自己設定的路徑設置, 
 而 ``testDBService`` 是我們自己寫的一個函式, 用於確認是否有連線成功(意思是 import 了自己的另一個檔案) :  
 
