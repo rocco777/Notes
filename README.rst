@@ -624,6 +624,51 @@ Exprees 自動產生器
 
 然後在瀏覽器中載入 ``http://localhost:3000/`` , 以存取應用程式
 
+錯誤處理
+----------------------
+
+錯誤處理中介軟體函數的定義方式, 與其他中介軟體函數相同, 
+差別在於錯誤處理函數的引數是四個而非三個：(err, req, res, next)
+
+::
+
+    app.use(function(err, req, res, next) {
+       console.error(err.stack);
+       res.status(500).send('Something broke!');
+    });
+
+您是在定義其他 app.use() 和路由呼叫之後, 最後才定義錯誤處理中介軟體
+
+::
+
+    var bodyParser = require('body-parser');
+    var methodOverride = require('method-override');
+
+    app.use(bodyParser());
+    app.use(methodOverride());
+    app.use(function(err, req, res, next) {
+    });
+
+中介軟體函數內的回應可以是任何喜好的格式，如：HTML 錯誤頁面、簡式訊息或 JSON 字串。
+為了方便組織(和更高層次的架構), 可以定義數個錯誤處理中介軟體函數, 
+就像處理一般中介軟體函數一樣。
+舉例來說, 如果想為使用及沒有使用 XHR 所建立的要求, 各定義一個錯誤處理程式, 可以使用下列指令：
+
+::
+
+    var bodyParser = require('body-parser');
+    var methodOverride = require('method-override');
+
+    app.use(bodyParser());
+    app.use(methodOverride());
+    app.use(logErrors);
+    app.use(clientErrorHandler);
+    app.use(errorHandler);
+
+
+
+
+
         
 MongoDB
 ======================
