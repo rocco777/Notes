@@ -869,9 +869,136 @@ header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭�
     }
 
 
+後台連前台流程
+---------------------
 
+先用 Express 自動產生, 接著分門別類開資料夾(Example : CSS, javascripts, database), 
+為 MongoDB 開設一個後台 Database 的資料夾後, 確認 MongoDB 有連線
 
+::
 
+    var MongoClient = require('mongodb').MongoClient
+
+    function mongo_connect() {
+        MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
+            if(err) {
+                throw err;
+            }
+            else{
+                console.log("Connect to database");
+            }
+        });
+    };
+
+    exports.mongo_connect = mongo_connect;
+
+這表示我們的資料庫在 ``localhost:27017`` 
+
+而在自動生成的檔案中 package.json 顯示了有關這個資料庫的所有有使用到的程式版本和路由, 
+當中有一條 ``"scripts": { "start": "node ./bin/www" }`` , 這條表示我們要和連線的方法, 
+接著我們使用 Mongoose 對 MongoDB 做控制, 所以要先進行連線
+
+首先 require 一個 mongoose 這個套件進來, function 內先使用 try catch 做錯誤處理, 讓程式 try 
+嘗試與 ``ongodb://localhost:27017/test`` 做連線, 如果錯誤了回饋一個 error 給後台, 而會看到路徑
+的最後面多了一個 /test , 這是我們在 mongodb 設定 database 的位置 (可以在 mongodb 上使用指令 ``show dbs`` 看到所有創建的位置), 
+ ``mongoose.connection.once("open"`` 而這段是讓程式連線一次, 如果連線成功我們在下面寫了, 顯示資料庫連線成功, 
+ 再來要為我們的資料做分類(table)和模板, ``mongoose.Schema {}`` 是要創建模板, 
+ 以後資料存入要有哪些訊息跟規範, ``let users = mongoose.model('User', user_schema);`` 把剛剛創建的模板
+ 丟到名為 'User' 的 table 並丟到存入變數 users , 讓其他 function 可以使用 
+
+::
+
+    let mongoose = require('mongoose');
+    let testDBService = require('./testDBService');
+    let testPicService = require('./userdatabase/picture');
+
+    function mongoose_connect () {
+        try{
+            mongoose.connect('mongodb://localhost:27017/test')
+        }catch(error){
+            console.log(error)
+        }
+        mongoose.connection.once("open",function(){
+            console.log('資料庫連線成功');
+            let user_schema = mongoose.Schema({
+                userName: {
+                    type: String,   
+                    required:true,  
+                    unique:true  
+                },
+                pass:{
+                    type:String
+                }
+            });
+            let pic_schema = mongoose.Schema({
+                pictures: {
+                    type: Array,
+                    required:true,
+                    unique:true
+                },
+                picName: {
+                    type: Array
+                },
+                picSummary: {
+                    type: Array
+                }
+            });
+            let users = mongoose.model('User', user_schema);
+            let pics = mongoose.model('Picture', pic_schema);
+            testDBService.testUserModel(users);
+            testPicService.picData(pics);
+
+        }).on('error',function(err){
+            throw err
+        })
+    }
+
+    exports.mongoose_connect = mongoose_connect;
+
+為了操作資料要先把剛剛的模板丟到 function , 當然也可以在同一個檔案下操作, 只是為了邏輯分類日後好管理, 故寫道另一個檔案去, 
+而下面 function create(user){} 是開給前台的 API
+
+::
+
+    let userModelInService = "";
+
+    function testUserModel(userModel){
+        userModelInService = userModel;
+        console.log("is the", userModelInService);
+    }
+
+    function create(user) {
+        userModelInService.create(user, (err, result)=>{
+            if(err){
+                // console.log("create err occur ", err);
+            }else{
+                console.log("create success");
+
+            }
+        });
+    }
+
+    exports.testUserModel = testUserModel;
+    exports.createUser = create;
+
+在 app.js require 剛剛連線 mogoose 的連線路徑, 接著我們要提取剛剛後台給的 API , method 取決於你要對他做的事, 
+stringify 是把資料作成字串, 省去空格的空間, 
+
+::
+
+    let createUserURL = "http://localhost:3000/users/test";
+    
+    function createUser(){
+
+        fetch(createUserURL, {
+            method: 'POST', 
+            body: JSON.stringify(userData),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).catch(error => console.log('Error:', error))
+        .then(response => console.log('Success:', response));
+    }
 
 
 
