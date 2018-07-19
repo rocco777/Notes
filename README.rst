@@ -898,6 +898,20 @@ header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭�
 
 若成功連線, 則表示本地端資料庫為 ``localhost:27017`` , 有正確開啟。
 
+router 的配置是由 users.js 來做分配 
+
+::
+
+    // localhost:3000/users/test
+    router.post('/test', function(req, res ,next) {
+
+    console.log("test request body = ", req.body);
+    //new database data
+    testDBService.createUser(req.body);
+    res.send('create a user');
+    })
+
+我用連線了一個 test 的 router
 
 
 
