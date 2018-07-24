@@ -706,7 +706,7 @@ MongoDB 是一個基於分布式文件儲存的數據庫。旨在為 WEB 應用�
     mongod
 
 如果安裝的 MongoDB 是自己開發或測試用的話, 建議可以把資料庫放在自己的主目錄下, 
-然後用自己的權限來執行 ``mongod`` 即可, 省去處理檔案全縣的麻煩。
+然後用自己的權限來執行 ``mongod`` 即可, 省去處理檔案權限的麻煩。
 
 ::
 
@@ -872,46 +872,10 @@ header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭�
 前後台溝通流程
 ---------------------
 
-先用 Express 自動產生, 在 public 下創建各目錄資料夾, 
-例如 : css javascripts images , 方便日後管理
-為 MongoDB 開設一個後台 Database 的資料夾
-
-
-建立與 MongoDB 連線
-
-::
-
-    var MongoClient = require('mongodb').MongoClient
-
-    function mongo_connect() {
-        MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
-            if(err) {
-                throw err;
-            }
-            else{
-                console.log("Connect to database");
-            }
-        });
-    };
-
-    exports.mongo_connect = mongo_connect;
-
-若成功連線, 則表示本地端資料庫為 ``localhost:27017`` , 有正確開啟。
-
-router 的配置是由 users.js 來做分配 
-
-::
-
-    // localhost:3000/users/test
-    router.post('/test', function(req, res ,next) {
-
-    console.log("test request body = ", req.body);
-    //new database data
-    testDBService.createUser(req.body);
-    res.send('create a user');
-    })
-
-我用連線了一個 test 的 router
+首先在我們讓 Express 框架自動產生後, 可以看到 bin 檔案夾底下有一個 www 的檔案, 
+而這份 ``./bin/www/`` 就是啟動其他檔案的文件 (其他文件包括 app.js  router 之類的), 
+其中 app.js 檔案, 裡面寫了我們的 router , 接下來因為要操作 mongodb 所以要使用套件 mongoose , 
+使用 schema 去創造 table , 最後在 user.js 補上 router 路徑, 使其正確啟動。  
 
 
 
