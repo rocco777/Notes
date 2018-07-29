@@ -878,6 +878,74 @@ header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭�
 使用 schema 去創造 table , 最後在 user.js 補上 router 路徑, 使其正確啟動。  
 
 
+獲取使用者鏡頭
+========================
+
+先提供 javascripts 的 程式碼 :
+
+::
+
+    navigator.getUserMedia = (navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia);
+
+    var video;
+    var webcamStream;
+
+    function startWebcam() {
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia(
+
+                {
+                    video: true,
+                    audio: false
+                },
+
+                // successCallback
+                function (localMediaStream) {
+                    video = document.querySelector('video');
+                    video.src = window.URL.createObjectURL(localMediaStream);
+                    webcamStream = localMediaStream;
+                },
+
+                // errorCallback
+                function (err) {
+                    console.log("The following error occured: " + err);
+                }
+            );
+        } else {
+            console.log("getUserMedia not supported");
+        }
+    }
+
+    function stopWebcam() {
+        webcamStream.stop();
+    }
+
+    var canvas, ctx;
+
+    function init() {
+        canvas = document.getElementById("myCanvas");
+        ctx = canvas.getContext('2d');
+    }
+
+    function snapshot() {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    }
+
+第一段 navigator.getUserMedia 是為了讓程式, 在每一個瀏覽器上都可以運行, webkit 代表 chrome 跟 safari , 
+moz 代表 Firefox, ms 代表 Edge 。
+
+第二段 document.querySelector('video') 這段就是抓取第一個標籤為 video 的元素, 
+靜態方法 URL.createObjectURL() 用於建立一個帶有URL的 DOMString 以代表參數中所傳入的物件,  
+這個新的物件 URL 代表了所指定的 File 物件 或是 Blob 物件。語法是這樣 : 
+
+::
+
+    objectURL = URL.createObjectURL(blob)
+
+blob : 一個用以建立物件URL的 File 物件 或是 Blob 物件
 
 
 
