@@ -919,10 +919,6 @@ header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭�
         }
     }
 
-    function stopWebcam() {
-        webcamStream.stop();
-    }
-
     var canvas, ctx;
 
     function init() {
@@ -938,14 +934,22 @@ header 先不理他, 就是一個 Tittle , 最後一樣錯誤處理, 用於瞭�
 moz 代表 Firefox, ms 代表 Edge 。
 
 第二段 document.querySelector('video') 這段就是抓取第一個標籤為 video 的元素, 
-靜態方法 URL.createObjectURL() 用於建立一個帶有URL的 DOMString 以代表參數中所傳入的物件,  
-這個新的物件 URL 代表了所指定的 File 物件 或是 Blob 物件。語法是這樣 : 
+靜態方法 URL.createObjectURL() 用於建立一個帶有 URL 的 DOMString 以代表參數中所傳入的物件,  
+這個新的物件 URL 代表了所指定的 File 物件 或是 Blob 物件。 API是這樣 : 
 
 ::
 
     objectURL = URL.createObjectURL(blob)
 
-blob : 一個用以建立物件URL的 File 物件 或是 Blob 物件
+blob : 一個用以建立物件 URL 的 File 物件 或是 Blob 物件
+
+而 errorCallback 是指電腦找不到 webcam 時所顯示的錯誤訊息, else 就是 getUserMedia 並未成功啟動, 
+function init() 則是針對畫面截圖作處理, 先找到 id 為 myCanvas 的物件, 2d 這個參數是設定一個平面的畫布, 
+用於儲存影像截圖, function snapshot() 就是設定畫布大小和在哪顯示, API是這樣 : 
+
+::
+
+    context.drawImage(img,x,y,width,height)
 
 
 
