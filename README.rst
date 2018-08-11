@@ -967,7 +967,7 @@ HTTP動詞
  - Patch : 更新資源部分資源內容
  - Head : 類似 Get , 但只回傳 HTTP header (safe & idempotent)
 
-在 app.get 裡, `` app.get('路徑', function(req, res){ 做事 }) `` 
+在 app.get 裡, ``app.get('路徑', function(req, res){ 做事 })`` 
 
 ::
 
@@ -975,15 +975,17 @@ HTTP動詞
         res.send('hello world')
     })
 
- ``library = req.params.library `` req.params 這個函式為 Node Exprees 取得參數的方法, 
- 下面的例子你會看到路徑中的 name 跟 取值的函式的 name 概念是一樣的, 他會把路徑 `` /user/:name `` , 
- name 存進 `` req.params.name `` 
+``library = req.params.library`` req.params 這個函式為 Node Exprees 取得參數的方法, 
+下面的例子你會看到路徑中的 name 跟 取值的函式的 name 概念是一樣的, 他會把路徑 ``/user/:name`` , 
+name 存進 ``req.params.name`` 
 
- ::
+::
 
     app.post('/user/name', function(req, res){
         req.params.name;
     });
+
+
 
 
 
