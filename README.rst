@@ -365,7 +365,7 @@ Django 本身有一個很實用的命令, 請確保在 ``manage.py`` 的檔案�
 
  - NAME - 數據庫的名稱。如果使用的是 SQLite，數據庫將是你電腦上的一個文件，在這種情況下， NAME 應該是此文件的絕對路徑，包括文件名。默認值 os.path.join(BASE_DIR, 'db.sqlite3') 將會把數據庫文件儲存在項目的根目錄。
  如果你不使用 SQLite，則必須添加一些額外設置，比如 USER 、 PASSWORD 、 HOST 等等。
- 想了解更多數據庫設置方面的內容，請看文檔： ` DATABASES <https://docs.djangoproject.com/zh-hans/2.0/ref/settings/>`_ 。
+ 想了解更多數據庫設置方面的內容。
 
 
 Exprees 
