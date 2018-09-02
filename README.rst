@@ -957,6 +957,46 @@ function init() 則是針對畫面截圖作處理, 先找到 id 為 myCanvas 的
 
 
 
+Html 
+===================
+
+網頁分割
+-------------------
+如果網頁有重複的地方, 我們不用讓他重新 loading 一次, 這樣可以節省效能, 
+所以我們可以使用一些好用的套件來幫助我們達到這個目標
+
+Mustache : 如稱為鬍子的套件, 它可以幫助我們將兩個 html 頁面合而為一, 
+舉例來說
+
+::
+
+    function getTemplate (templateURL, simple) {
+        if (simple === true) {
+            return fs.readFileSync(templateURL, 'utf8');
+        }
+        return removeNewline(condenseWhitespace(fs.readFileSync(templateURL, 'utf8')))
+    }
+    //// 抓取網頁內容
+
+    var templates = {
+        layout : getTemplate('路徑')
+        search : getTemplate('路徑')
+    }
+    /// 設定等等要用的 object
+
+    function generatePage() {
+        var typepage = {
+            page : templates.search,
+        }
+        fullContent = Mustache.render(templates.layout, typepage);
+        return fullContent
+    };
+    /// 設置 object 要填入的位置 
+
+    var page = generatePage();
+
+詳細的操作說明  `Mustache套件 <https://github.com/janl/mustache.js>`_
+
 
 
 
