@@ -995,7 +995,11 @@ Mustache : 如稱為鬍子的套件, 它可以幫助我們將兩個 html 頁面�
 
     var page = generatePage();
 
-詳細的操作說明  `Mustache套件 <https://github.com/janl/mustache.js>`_
+這樣就可以讓重複利用已經寫好的某些 html 版型, 
+而不是重複貼上一段 cdoe , 增加美觀和乾淨。
+
+
+詳細的操作說明  `Mustache套件 <https://github.com/janl/mustache.js>`_ 
 
 
 
